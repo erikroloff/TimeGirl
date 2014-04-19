@@ -20,6 +20,10 @@
             android:name="com.erikroloff.timegirl.app.SingleFragmentActivity"
             android:label="@string/title_activity_single_fragment" >
         </activity>
+        <activity
+            android:name="com.erikroloff.timegirl.app.TaskListActivity"
+            android:label="@string/title_activity_task_list" >
+        </activity>
     </application>
 
 </manifest>
