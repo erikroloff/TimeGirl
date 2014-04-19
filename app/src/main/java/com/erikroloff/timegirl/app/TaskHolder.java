@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by erikroloff on 4/19/14.
@@ -29,4 +30,47 @@ public class TaskHolder {
             Log.e(TAG, "Error loading tasks: ", e);
         }
     }
+
+    public static TaskHolder get(Context c) {
+        if (sTaskHolder == null) {
+            sTaskHolder = new TaskHolder(c.getApplicationContext());
+        }
+
+        return sTaskHolder;
+    }
+
+    public Task getTask(UUID id) {
+        for (Task t : mTasks) {
+            if (t.getmId().equals(id)) {
+                return t;
+            }
+        }
+
+        return null;
+    }
+
+    public void addTask(Task t) {
+        mTasks.add(t);
+        saveTasks();
+    }
+
+    public ArrayList<Task> getTasks() {
+        return mTasks;
+    }
+
+    public void deleteTask(Task t) {
+        mTasks.remove(t);
+    }
+
+    public boolean saveTasks() {
+        try{
+            mSerializer.saveTasks(mTasks);
+            Log.d(TAG, "tasks saved to file");
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, "Error saving tasks: " + e);
+            return false;
+        }
+    }
+
 }
