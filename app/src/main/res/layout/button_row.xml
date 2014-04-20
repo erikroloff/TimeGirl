@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_weight="0.10">
+
+    <Button
+        android:text="Start"
+        android:id="@+id/startButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TasksAppButton"/>
+
+    <Button
+        android:text="Stop"
+        android:id="@+id/stopButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        style="@style/TasksAppButton"/>
+
+</LinearLayout>

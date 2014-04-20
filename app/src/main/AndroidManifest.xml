@@ -28,6 +28,10 @@
             android:name="com.erikroloff.timegirl.app.TaskPagerActivity"
             android:label="@string/title_activity_task_pager" >
         </activity>
+        <activity
+            android:name="com.erikroloff.timegirl.app.TaskActivity"
+            android:label="@string/title_activity_task" >
+        </activity>
     </application>
 
 </manifest>

@@ -12,5 +12,6 @@
     <string name="hide_subtitle">Hide Subtitle</string>
     <string name="delete_task">Delete Task</string>
     <string name="title_activity_task_pager">TaskPagerActivity</string>
+    <string name="title_activity_task">TaskActivity</string>
 
 </resources>
