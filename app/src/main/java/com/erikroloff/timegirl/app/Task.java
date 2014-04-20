@@ -30,7 +30,7 @@ public class Task {
     private DateTime mLastStart;
     private DateTime mLastStop;
 
-    public UUID getmId() {
+    public UUID getId() {
         return mId;
     }
 
