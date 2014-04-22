@@ -1,6 +1,7 @@
 package com.erikroloff.timegirl.app;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,8 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import org.joda.time.DateTime;
+import org.joda.time.Period;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 /**
@@ -27,6 +31,8 @@ public class TaskFragment extends Fragment {
     private TextView tvnumberOfMinutes;
     private TextView tvnumberOfSeconds;
     private EditText edtTaskName;
+    private final Handler myHandler = new Handler();
+    private int i = 0;
 
 
     @Override
@@ -45,6 +51,8 @@ public class TaskFragment extends Fragment {
 
         mTask = new Task();
         TaskHolder.get(getActivity()).addTask(mTask);
+
+
 
     }
 
@@ -74,7 +82,7 @@ public class TaskFragment extends Fragment {
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                onStart();
+                onStartButtonClicked();
             }
         });
 
@@ -82,7 +90,7 @@ public class TaskFragment extends Fragment {
         stopButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                onStop();
+                onStopButtonClicked();
             }
         });
 
@@ -92,6 +100,12 @@ public class TaskFragment extends Fragment {
         tvnumberOfHours = (TextView) v.findViewById(R.id.tvnumberOfHours);
         tvnumberOfMinutes = (TextView) v.findViewById(R.id.tvnumberOfMinutes);
         tvnumberOfSeconds = (TextView) v.findViewById(R.id.tvnumberOfSeconds);
+
+        Timer myTimer = new Timer();
+        myTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {UpdateGUI();}
+        }, 0, 1000);
 
 
 //        edtTaskName.setText(mTask.getmTaskName());
@@ -103,6 +117,28 @@ public class TaskFragment extends Fragment {
 
         return v;
     }
+
+    private void UpdateGUI() {
+        i++;
+        //tv.setText(String.valueOf(i));
+        myHandler.post(myRunnable);
+    }
+
+    final Runnable myRunnable = new Runnable() {
+        public void run() {
+            Period amountOnTask = mTask.getTimeOnTask();
+            int seconds = amountOnTask.getSeconds();
+            int minutes = amountOnTask.getMinutes();
+            int hours = amountOnTask.getHours();
+            int days = amountOnTask.getDays();
+
+            tvnumberOfSeconds.setText(Integer.toString(seconds));
+            tvnumberOfMinutes.setText(Integer.toString(minutes));
+            tvnumberOfHours.setText(Integer.toString(hours));
+            tvnumberOfDays.setText(Integer.toString(days));
+//            tvnumberOfSeconds.setText(String.valueOf(i));
+        }
+    };
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -123,13 +159,13 @@ public class TaskFragment extends Fragment {
 
     }
 
-//    public void onStart() {
-//        mTask.setmLastStart(DateTime.now());
-//    }
-//
-//    public void onStop() {
-//        mTask.setmLastStop(DateTime.now());
-//    }
+    public void onStartButtonClicked() {
+        mTask.setmLastStart(DateTime.now());
+    }
+
+    public void onStopButtonClicked() {
+        mTask.setmLastStop(DateTime.now());
+    }
 
     @Override
     public void onPause() {

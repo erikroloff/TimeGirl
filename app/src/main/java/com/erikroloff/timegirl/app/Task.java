@@ -1,6 +1,8 @@
 package com.erikroloff.timegirl.app;
 
 
+import android.util.Log;
+
 import org.joda.time.Period;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -69,6 +71,7 @@ public class Task {
 
     public void setmLastStart(DateTime mLastStart) {
         this.mLastStart = mLastStart;
+        this.mActiveStatus = true;
     }
 
     public DateTime getmLastStop() {
@@ -80,20 +83,31 @@ public class Task {
     }
 
     public boolean isActive() {
-        if (mLastStart.isBefore(mLastStop)) {
-            return true;
-        } else {
+
+        if (mLastStart == null) {
             return false;
+        } else {
+            if (mLastStart.isBefore(mLastStop)) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
     public Period getTimeOnTask() {
         Period timeOnTask;
-        if (this.isActive()) {
-            timeOnTask = new Period(mLastStart, DateTime.now());
+        if (mActiveStatus) {
+            if (this.isActive()) {
+                timeOnTask = new Period(mLastStart, DateTime.now());
+                Log.d("Task", "Calling Period(mLastStart, DateTime.now())");
+            } else {
+                timeOnTask = new Period(mLastStart, mLastStop);
+            }
         } else {
-            timeOnTask = new Period(mLastStart, mLastStop);
+            timeOnTask = new Period(0);
         }
+
 
         return timeOnTask;
     }
@@ -101,6 +115,7 @@ public class Task {
 
     public Task() {
         mId = UUID.randomUUID();
+        mActiveStatus = false;
     }
 
     public Task(JSONObject json) throws JSONException, ParseException {
