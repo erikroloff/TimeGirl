@@ -41,7 +41,7 @@ public class TaskHolder {
 
     public Task getTask(UUID id) {
         for (Task t : mTasks) {
-            if (t.getmId().equals(id)) {
+            if (t.getId().equals(id)) {
                 return t;
             }
         }

@@ -29,6 +29,7 @@ public class Task {
     private boolean mActiveStatus;
     private DateTime mLastStart;
     private DateTime mLastStop;
+    private DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
 
     public UUID getId() {
         return mId;
@@ -107,12 +108,11 @@ public class Task {
         mTaskName = json.getString("taskName");
         mTotalTime = Double.valueOf(json.getString("totalTime"));
         mActiveStatus = Boolean.getBoolean(json.getString("activeStatus"));
-        mLastStart = DateTime.parse(json.getString("lastStart"));
-        mLastStop = DateTime.parse(json.getString("lastStop"));
+        mLastStart = fmt.parseDateTime(json.getString("lastStart"));
+        mLastStop = fmt.parseDateTime(json.getString("lastStop"));
     }
 
     public JSONObject toJSON() throws JSONException {
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:SS");
 
         JSONObject json = new JSONObject();
         json.put(JSON_ID, mId.toString());

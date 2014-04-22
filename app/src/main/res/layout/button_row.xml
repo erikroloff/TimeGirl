@@ -12,6 +12,7 @@
         android:id="@+id/startButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick"onStart"
         style="@style/TasksAppButton"/>
 
     <Button
@@ -20,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:onClick"onStop"
         style="@style/TasksAppButton"/>
 
 </LinearLayout>

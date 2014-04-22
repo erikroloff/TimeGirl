@@ -48,7 +48,7 @@ public class TaskPagerActivity extends FragmentActivity {
             }
         });
 
-        UUID contactId = (UUID)getIntent().getSerializableExtra(TaskDetailFragment.EXTRA_CONTACT_ID);
+        UUID contactId = (UUID)getIntent().getSerializableExtra(TaskDetailFragment.EXTRA_TASK_ID);
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getId().equals(contactId)) {
                 mViewPager.setCurrentItem(i);

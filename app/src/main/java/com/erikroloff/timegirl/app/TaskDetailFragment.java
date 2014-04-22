@@ -2,7 +2,6 @@ package com.erikroloff.timegirl.app;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,10 @@ import java.util.UUID;
 /**
  * Created by erikroloff on 4/20/14.
  */
-public class TaskFragment extends Fragment {
+public class TaskDetailFragment extends Fragment {
     public static final String EXTRA_TASK_ID = "timegirl.TASK_ID";
-    private ArrayList<Task> tasks = null;
-    private Task mTask;
+    ArrayList<Task> tasks = null;
+    Task mTask;
     private TextView tvnumberOfDays;
     private TextView tvnumberOfHours;
     private TextView tvnumberOfMinutes;
@@ -31,27 +30,23 @@ public class TaskFragment extends Fragment {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         if (TaskHolder.get(getActivity()).getTasks() == null) {
-            // Make new mTask if mTask id ...
+            Task task = new Task();
+            task.setmTaskName("Test");
 
-//            task.setmTaskName("Test");
-
-
+            TaskHolder.get(getActivity()).addTask(task);
         } else {
             tasks = TaskHolder.get(getActivity()).getTasks();
         }
 
-        mTask = new Task();
-        TaskHolder.get(getActivity()).addTask(mTask);
-
-//        UUID taskId = (UUID)getArguments().getSerializable(EXTRA_TASK_ID);
-//        mTask = TaskHolder.get(getActivity()).getTask(taskId);
+        UUID taskId = (UUID)getArguments().getSerializable(EXTRA_TASK_ID);
+        mTask = TaskHolder.get(getActivity()).getTask(taskId);
     }
 
-    public static TaskFragment newInstance(UUID taskId) {
+    public static TaskDetailFragment newInstance(UUID taskId) {
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_TASK_ID, taskId);
 
-        TaskFragment fragment = new TaskFragment();
+        TaskDetailFragment fragment = new TaskDetailFragment();
         fragment.setArguments(args);
 
         return fragment;
@@ -77,7 +72,7 @@ public class TaskFragment extends Fragment {
         tvnumberOfSeconds = (TextView) v.findViewById(R.id.tvnumberOfSeconds);
 
 
-//        edtTaskName.setText(mTask.getmTaskName());
+        edtTaskName.setText(mTask.getmTaskName());
 
         // Need to add setText methods for the Days, Hours, Minutes, and Seconds
 
@@ -100,24 +95,13 @@ public class TaskFragment extends Fragment {
     }
 
     private void getTaskInfoFromInput() {
-        String taskName = edtTaskName.getText().toString();
-        Log.e("Debug", " taskName is : " + taskName);
-        mTask.setmTaskName(taskName);
-
-    }
-
-    public void onStart(View v) {
-
-    }
-
-    public void onStop(View v) {
+        mTask.setmTaskName(edtTaskName.getText().toString());
 
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        getTaskInfoFromInput();
         TaskHolder.get(getActivity()).saveTasks();
     }
 }
