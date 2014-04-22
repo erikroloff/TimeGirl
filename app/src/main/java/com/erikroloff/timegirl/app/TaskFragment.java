@@ -6,8 +6,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -43,8 +46,6 @@ public class TaskFragment extends Fragment {
         mTask = new Task();
         TaskHolder.get(getActivity()).addTask(mTask);
 
-//        UUID taskId = (UUID)getArguments().getSerializable(EXTRA_TASK_ID);
-//        mTask = TaskHolder.get(getActivity()).getTask(taskId);
     }
 
     public static TaskFragment newInstance(UUID taskId) {
@@ -68,6 +69,22 @@ public class TaskFragment extends Fragment {
         } else {
 
         }
+
+        Button startButton = (Button) v.findViewById(R.id.startButton);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                onStart();
+            }
+        });
+
+        Button stopButton = (Button) v.findViewById(R.id.stopButton);
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                onStop();
+            }
+        });
 
         edtTaskName = (EditText) v.findViewById(R.id.edtTaskName);
 
@@ -106,13 +123,13 @@ public class TaskFragment extends Fragment {
 
     }
 
-    public void onStart(View v) {
-
-    }
-
-    public void onStop(View v) {
-
-    }
+//    public void onStart() {
+//        mTask.setmLastStart(DateTime.now());
+//    }
+//
+//    public void onStop() {
+//        mTask.setmLastStop(DateTime.now());
+//    }
 
     @Override
     public void onPause() {
