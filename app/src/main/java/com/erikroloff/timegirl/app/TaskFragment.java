@@ -33,6 +33,7 @@ public class TaskFragment extends Fragment {
     private EditText edtTaskName;
     private final Handler myHandler = new Handler();
     private int i = 0;
+    private Timer myTimer;
 
 
     @Override
@@ -101,7 +102,7 @@ public class TaskFragment extends Fragment {
         tvnumberOfMinutes = (TextView) v.findViewById(R.id.tvnumberOfMinutes);
         tvnumberOfSeconds = (TextView) v.findViewById(R.id.tvnumberOfSeconds);
 
-        Timer myTimer = new Timer();
+        myTimer = new Timer();
         myTimer.schedule(new TimerTask() {
             @Override
             public void run() {UpdateGUI();}
@@ -170,6 +171,8 @@ public class TaskFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        myTimer.cancel();  // Terminates this timer, discarding any currently scheduled tasks.
+        myTimer.purge();
         getTaskInfoFromInput();
         TaskHolder.get(getActivity()).saveTasks();
     }
