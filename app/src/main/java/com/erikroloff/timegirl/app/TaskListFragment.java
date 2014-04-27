@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.support.v7.view.ActionMode;
+import android.view.ActionMode;
+import android.widget.AbsListView.MultiChoiceModeListener;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -37,7 +38,7 @@ public class TaskListFragment extends ListFragment {
         getActivity().setTitle(R.string.title_activity_task_list);
         mTasks = TaskHolder.get(getActivity()).getTasks();
         TaskAdapter adapter = new TaskAdapter(mTasks);
-        adapter.notifyDataSetChanged();
+//        adapter.notifyDataSetChanged();
         setListAdapter(adapter);
         setRetainInstance(true);
         mSubtitleVisible = false;
@@ -70,7 +71,7 @@ public class TaskListFragment extends ListFragment {
             registerForContextMenu(listView);
         } else {
             listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-            listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+            listView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 
                 public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                     MenuInflater inflater = mode.getMenuInflater();
@@ -81,7 +82,7 @@ public class TaskListFragment extends ListFragment {
                 public void onItemCheckedStateChanged(ActionMode mode, int position,
                                                       long id, boolean checked) {
                 }
-
+                @Override
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.menu_item_delete_task:
@@ -108,30 +109,7 @@ public class TaskListFragment extends ListFragment {
 
                 }
 
-                @Override
-                public void onItemCheckedStateChanged(android.view.ActionMode mode, int position, long id, boolean checked) {
 
-                }
-
-                @Override
-                public boolean onCreateActionMode(android.view.ActionMode mode, Menu menu) {
-                    return false;
-                }
-
-                @Override
-                public boolean onPrepareActionMode(android.view.ActionMode mode, Menu menu) {
-                    return false;
-                }
-
-                @Override
-                public boolean onActionItemClicked(android.view.ActionMode mode, MenuItem item) {
-                    return false;
-                }
-
-                @Override
-                public void onDestroyActionMode(android.view.ActionMode mode) {
-
-                }
             });
 
         }
@@ -210,6 +188,7 @@ public class TaskListFragment extends ListFragment {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         getActivity().getMenuInflater().inflate(R.menu.task_list_item_context, menu);
+        Log.d("TaskListFragment", "Got to onCreateContextMenu");
     }
 
     @Override
