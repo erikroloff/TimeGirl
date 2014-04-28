@@ -18,7 +18,7 @@
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:text="Task Name" />
-    <TextView android:id="@+id/contact_list_item_emailTextView"
+    <TextView android:id="@+id/task_list_item_timeTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/task_list_item_titleTextView"

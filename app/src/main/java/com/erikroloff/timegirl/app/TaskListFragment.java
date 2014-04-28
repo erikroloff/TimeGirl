@@ -22,6 +22,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
+import org.joda.time.format.PeriodFormat;
+
 import java.util.ArrayList;
 
 /**
@@ -136,6 +138,10 @@ public class TaskListFragment extends ListFragment {
             TextView titleTextView =
                     (TextView)convertView.findViewById(R.id.task_list_item_titleTextView);
             titleTextView.setText(t.getmTaskName());
+
+            TextView timeTextView =
+                    (TextView)convertView.findViewById(R.id.task_list_item_timeTextView);
+            timeTextView.setText(PeriodFormat.getDefault().print(t.getTimeOnTask()));
 
             return convertView;
         }
