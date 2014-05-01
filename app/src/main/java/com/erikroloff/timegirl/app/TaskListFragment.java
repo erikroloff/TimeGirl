@@ -1,6 +1,7 @@
 package com.erikroloff.timegirl.app;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,27 @@ import java.util.ArrayList;
 public class TaskListFragment extends ListFragment {
     private ArrayList<Task> mTasks;
     private boolean mSubtitleVisible;
+    private Callbacks mCallbacks;
+
+    public interface Callbacks {
+        void onTaskSelected(Task task);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mCallbacks = (Callbacks)activity;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCallbacks = null;
+    }
+
+    public void updateUI() {
+        ((TaskAdapter)getListAdapter()).notifyDataSetChanged();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -151,9 +173,10 @@ public class TaskListFragment extends ListFragment {
         // get the Task from the adapter
         Task t = ((TaskAdapter)getListAdapter()).getItem(position);
         // start an instance of TaskPagerActivity
-        Intent i = new Intent(getActivity(), TaskPagerActivity.class);
-        i.putExtra(TaskFragment.EXTRA_TASK_ID, t.getId());
-        startActivityForResult(i, 0);
+//        Intent i = new Intent(getActivity(), TaskPagerActivity.class);
+//        i.putExtra(TaskFragment.EXTRA_TASK_ID, t.getId());
+//        startActivityForResult(i, 0);
+        mCallbacks.onTaskSelected(t);
     }
 
     @Override

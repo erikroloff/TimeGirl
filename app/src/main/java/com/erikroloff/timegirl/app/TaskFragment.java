@@ -1,5 +1,6 @@
 package com.erikroloff.timegirl.app;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -34,6 +35,7 @@ public class TaskFragment extends Fragment {
     private final Handler myHandler = new Handler();
     private int i = 0;
     private Timer myTimer;
+
 
 
     @Override

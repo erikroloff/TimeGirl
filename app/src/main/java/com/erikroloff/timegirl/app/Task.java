@@ -35,6 +35,7 @@ public class Task {
     private DateTime mLastStart;
     private DateTime mLastStop;
     private DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
+    private Period timeOnTask;
 
 
     public UUID getId() {
@@ -109,7 +110,7 @@ public class Task {
     }
 
     public Period getTimeOnTask() {
-        Period timeOnTask = new Period(0);
+        timeOnTask = new Period(0);
 
 //        Period totalTimeOnTask;
         if (mActiveStatus) {
