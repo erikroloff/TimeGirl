@@ -55,7 +55,7 @@ public class TaskFragment extends Fragment {
         mTask = new Task();
         TaskHolder.get(getActivity()).addTask(mTask);
 
-
+        getActivity().setTitle(R.string.title_activity_task);
 
     }
 
