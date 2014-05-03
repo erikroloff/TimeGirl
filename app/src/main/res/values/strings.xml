@@ -13,6 +13,7 @@
     <string name="delete_task">Delete Task</string>
     <string name="title_activity_task_pager">Task</string>
     <string name="title_activity_task">Task</string>
+    <string name="list_button">Task List</string>
 
 
 </resources>
