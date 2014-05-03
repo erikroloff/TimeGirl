@@ -25,11 +25,21 @@
         </activity>
         <activity
             android:name="com.erikroloff.timegirl.app.TaskPagerActivity"
-            android:label="@string/title_activity_task_pager" >
+            android:label="@string/title_activity_task_pager"
+            android:parentActivityName="com.erikroloff.timegirl.app.TaskListActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.erikroloff.timegirl.app.TaskListActivity" />
         </activity>
         <activity
             android:name="com.erikroloff.timegirl.app.TaskActivity"
-            android:label="@string/title_activity_task" >
+            android:label="@string/title_activity_task"
+            android:parentActivityName="com.erikroloff.timegirl.app.TaskListActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.erikroloff.timegirl.app.TaskListActivity" />
         </activity>
     </application>
 
