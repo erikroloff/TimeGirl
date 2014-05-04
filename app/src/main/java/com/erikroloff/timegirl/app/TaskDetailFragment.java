@@ -108,11 +108,6 @@ public class TaskDetailFragment extends Fragment {
         }, 0, 1000);
 
 
-//        edtTaskName.setText(mTask.getmTaskName());
-
-        // Need to add setText methods for the Days, Hours, Minutes, and Seconds
-
-
         return v;
     }
 

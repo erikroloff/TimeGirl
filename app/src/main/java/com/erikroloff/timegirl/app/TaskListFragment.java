@@ -62,7 +62,6 @@ public class TaskListFragment extends ListFragment {
         getActivity().setTitle(R.string.title_activity_task_list);
         mTasks = TaskHolder.get(getActivity()).getTasks();
         TaskAdapter adapter = new TaskAdapter(mTasks);
-//        adapter.notifyDataSetChanged();
         setListAdapter(adapter);
         setRetainInstance(true);
         mSubtitleVisible = false;
@@ -75,7 +74,7 @@ public class TaskListFragment extends ListFragment {
         TaskHolder taskHolder = TaskHolder.get(getActivity());
         mTasks = taskHolder.getTasks();
         adapter.notifyDataSetChanged();
-        Log.d("Debug", "List Frag Resumed");
+        //Log.d("Debug", "List Frag Resumed");
     }
 
     @TargetApi(11)
@@ -172,10 +171,7 @@ public class TaskListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         // get the Task from the adapter
         Task t = ((TaskAdapter)getListAdapter()).getItem(position);
-        // start an instance of TaskPagerActivity
-//        Intent i = new Intent(getActivity(), TaskPagerActivity.class);
-//        i.putExtra(TaskFragment.EXTRA_TASK_ID, t.getId());
-//        startActivityForResult(i, 0);
+
         mCallbacks.onTaskSelected(t);
     }
 

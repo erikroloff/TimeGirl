@@ -17,6 +17,7 @@ import java.util.UUID;
 import org.joda.time.DateTime;
 
 /**
+ * Model Class for the App
  * Created by erikroloff on 4/5/14.
  */
 public class Task {
@@ -96,6 +97,7 @@ public class Task {
         this.mLastStop = mLastStop;
     }
 
+    // Confusing way of finding whether the Task is active or not
     public boolean isActive() {
 
         if (mLastStart == null) {
@@ -109,40 +111,31 @@ public class Task {
         }
     }
 
+    // This is the method to be called to get the Time On Task to display
     public Period getTimeOnTask() {
         timeOnTask = new Period(0);
 
-//        Period totalTimeOnTask;
+
         if (mActiveStatus) {
-//            if (this.isActive()) {
-                timeOnTask = new Period(mLastStart, DateTime.now());
-                Log.d("Task", "Calling Period(mLastStart, DateTime.now())");
-//            } else {
-//                timeOnTask = new Period(mLastStart,mLastStop);
-//            }
-        } else {
-            Log.d("Task", "Calling new Period(0)");
-//            timeOnTask = new Period(0);
+
+            timeOnTask = new Period(mLastStart, DateTime.now());
+            //Log.d("Task", "Calling Period(mLastStart, DateTime.now())");
+
         }
 
         timeOnTask = timeOnTask.plus(this.getmTotalTime());
-//        Duration oldTotal = this.getmTotalTime().toStandardDuration();
-//        Duration lastInterval = timeOnTask.toStandardDuration();
-//        Duration newTotal = new Duration(oldTotal.getMillis() + lastInterval.getMillis());
-//        Period newTotalTime = newTotal.toPeriod();
-//        totalTimeOnTask = newTotalTime;
-
 
         return timeOnTask;
     }
 
-
+    // Public Constructor method
     public Task() {
         mId = UUID.randomUUID();
         mActiveStatus = false;
         this.setmTotalTime(getTimeOnTask());
     }
 
+    // Constructor from JSON
     public Task(JSONObject json) throws JSONException, ParseException {
         mId = UUID.fromString(json.getString(JSON_ID));
         mTaskName = json.getString("taskName");
@@ -152,6 +145,7 @@ public class Task {
         mLastStop = fmt.parseDateTime(json.getString("lastStop"));
     }
 
+    // Turns a Task into JSON
     public JSONObject toJSON() throws JSONException {
         if (!this.isActive()) {
             this.setmTotalTime(getTimeOnTask());

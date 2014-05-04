@@ -45,6 +45,7 @@ public class TaskListActivity extends SingleFragmentActivity
         }
     }
 
+    // Unused at this point, might be added later
     public void onTaskUpdated(Task task) {
         FragmentManager fm = getSupportFragmentManager();
         TaskListFragment listFragment = (TaskListFragment)

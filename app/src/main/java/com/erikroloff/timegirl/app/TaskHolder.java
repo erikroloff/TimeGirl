@@ -39,6 +39,7 @@ public class TaskHolder {
         return sTaskHolder;
     }
 
+    // Gets Task from Task ArrayList
     public Task getTask(UUID id) {
         for (Task t : mTasks) {
             if (t.getId().equals(id)) {
@@ -49,6 +50,7 @@ public class TaskHolder {
         return null;
     }
 
+    // Adds Task to ArrayList
     public void addTask(Task t) {
         mTasks.add(t);
         saveTasks();
@@ -62,6 +64,7 @@ public class TaskHolder {
         mTasks.remove(t);
     }
 
+    // Saves to JSON File
     public boolean saveTasks() {
         try{
             mSerializer.saveTasks(mTasks);

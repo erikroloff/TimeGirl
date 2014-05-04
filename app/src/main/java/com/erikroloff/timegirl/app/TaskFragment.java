@@ -43,10 +43,6 @@ public class TaskFragment extends Fragment {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         if (TaskHolder.get(getActivity()).getTasks() == null) {
-            // Make new mTask if mTask id ...
-
-//            task.setmTaskName("Test");
-
 
         } else {
             tasks = TaskHolder.get(getActivity()).getTasks();
@@ -139,13 +135,11 @@ public class TaskFragment extends Fragment {
             tvnumberOfMinutes.setText(Integer.toString(minutes));
             tvnumberOfHours.setText(Integer.toString(hours));
             tvnumberOfDays.setText(Integer.toString(days));
-//            tvnumberOfSeconds.setText(String.valueOf(i));
         }
     };
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        //outState.putParcelableArrayList("key",contacts);
 
         getTaskInfoFromInput();
 
