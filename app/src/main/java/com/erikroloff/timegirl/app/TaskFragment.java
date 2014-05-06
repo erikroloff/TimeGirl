@@ -107,22 +107,17 @@ public class TaskFragment extends Fragment {
         }, 0, 1000);
 
 
-//        edtTaskName.setText(mTask.getmTaskName());
-
-        // Need to add setText methods for the Days, Hours, Minutes, and Seconds
-
-
-
-
         return v;
     }
 
+    // This is called to update the UI every second.
     private void UpdateGUI() {
         i++;
         //tv.setText(String.valueOf(i));
         myHandler.post(myRunnable);
     }
 
+    // Updates the UI
     final Runnable myRunnable = new Runnable() {
         public void run() {
             Period amountOnTask = mTask.getTimeOnTask();
@@ -149,6 +144,8 @@ public class TaskFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
+
+    // This method gets the Task Name so that it can be saved.
     private void getTaskInfoFromInput() {
         String taskName = edtTaskName.getText().toString();
         Log.e("Debug", " taskName is : " + taskName);
@@ -156,10 +153,12 @@ public class TaskFragment extends Fragment {
 
     }
 
+    // Action upon pressing Start Button
     public void onStartButtonClicked() {
         mTask.setmLastStart(DateTime.now());
     }
 
+    // Action upon pressing Stop Button
     public void onStopButtonClicked() {
         mTask.setmLastStop(DateTime.now());
     }
