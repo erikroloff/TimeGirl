@@ -190,9 +190,9 @@ public class TaskListFragment extends ListFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_new_task:
-                Intent i = new Intent(getActivity(), TaskActivity.class);
-
-                startActivityForResult(i, 0);
+                Task newTask = new Task();
+                TaskHolder.get(getActivity()).addTask(newTask);
+                mCallbacks.onTaskSelected(newTask);
                 return true;
             case R.id.menu_item_show_subtitle:
                 if (getActivity().getActionBar().getSubtitle() == null) {
